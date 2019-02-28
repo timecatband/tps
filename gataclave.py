@@ -8,13 +8,13 @@ def intro():
 
     # Riff
     c.add(SceneCommand(PartyBar.PURPLE, 0))
-    c.add(SceneCommand(PartyBar.WHITE, 5))
+    c.add(FadeCommand(PartyBar.WHITE, PartyBar.BLACK, 5, 2))
     # Response
     c.add(SceneCommand(PartyBar.PURPLE, 3))
-    c.add(SceneCommand(PartyBar.RED, 3.5))
+    c.add(FadeCommand(PartyBar.RED, PartyBar.GREEN, 3.5, 2))
 
     c.add(SceneCommand(PartyBar.PURPLE, 4.5))
-    c.add(SceneCommand(PartyBar.WHITE, 5))
+    c.add(FadeCommand(PartyBar.WHITE, PartyBar.GREEN, 5, 2))
     c.add(SleepCommand(3))
     
     pr = PartyBar()
