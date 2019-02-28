@@ -11,11 +11,18 @@ def buildVerse():
     b1.set(CYAN, WHITE, WHITE, CYAN)
     b2 = PartyBar()
     b2.set(WHITE, mix(BLUE, RED, 0.3), mix(BLUE, RED, 0.3), WHITE)
+    b3 = PartyBar()
+    b3.set(PURPLE, CYAN, CYAN, PURPLE)
+    b4 = PartyBar()
+
+    b4.set(BLUE, PURPLE, PURPLE, BLUE)
     
     c = Chase()
     c.add(SceneCommand(b1, 0))
-    c.add(FadeCommand(b1, b2, 1, 1.8))
-    c.add(FadeCommand(b2, b1, 3, 1.8))
+    c.add(FadeCommand(b1, b2, 0, 2.8))
+    c.add(FadeCommand(b2, b3, 3, 2.8))
+    c.add(FadeCommand(b3, b4, 3, 2.8))
+    c.add(FadeCommand(b4, b1, 3, 2.8))
     c.loop = True
     return c
 
@@ -58,7 +65,7 @@ def buildChorus():
     chorus.add(makeDimCommand(red, 0, 0.5, 3))
     chorus.add(makeReverseDimCommand(purple, 6, 0.2, 2))
     chorus.add(makeReverseDimCommand(orange, 3, 0.2, 2))
-x    chorus.add(SleepCommand(3))
+    chorus.add(SleepCommand(3))
 
     # "Theres...a sound around"
     chorus.add(SceneCommand(white, 0))

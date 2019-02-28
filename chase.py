@@ -10,5 +10,8 @@ class Chase():
     self.commands.append(SceneCommand(scene, switchAfter))
   def add(self, command):
     self.commands.append(command)
+  def addMany(self, commands):
+    for c in commands:
+      self.add(c)
   def extend(self, other):
       self.commands.extend(copy.deepcopy(other.commands))
