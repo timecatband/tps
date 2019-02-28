@@ -4,7 +4,7 @@ from commands import *
 from colors import *
 import copy
 
-def fourstepmover(duration, color, background = BLACK):
+def fourstepmover(duration, color, background = BLACK, fadeDivisor=2.0):
     c = Chase()
     p0 = PartyBar()
     p1 = PartyBar()
@@ -31,10 +31,10 @@ def fourstepmover(duration, color, background = BLACK):
 
     sceneDur = duration / 4.0
     
-    c.add(FadeCommand(None, p1, 0, sceneDur/2))
-    c.add(FadeCommand(p1, p2, sceneDur, sceneDur/2))
-    c.add(FadeCommand(p2, p3, sceneDur, sceneDur/2))
-    c.add(FadeCommand(p3, p4, sceneDur, sceneDur/2))
+    c.add(FadeCommand(None, p1, 0, sceneDur/fadeDivisor))
+    c.add(FadeCommand(p1, p2, sceneDur, sceneDur/fadeDivisor))
+    c.add(FadeCommand(p2, p3, sceneDur, sceneDur/fadeDivisor))
+    c.add(FadeCommand(p3, p4, sceneDur, sceneDur/fadeDivisor))
     c.add(SleepCommand(sceneDur))
     return c
     
