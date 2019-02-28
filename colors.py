@@ -10,6 +10,9 @@ CYAN = (0, 255, 255)
 YELLOW = (255, 255, 0)
 ORANGE = (255, 100, 0)
 
+def dim(c, a):
+  return (c[0]*a, c[1]*a, c[2]*a)
+
 def mix(c1, c2, a):
   b = (0, 0, 0)
   return (int(floor((c1[0]+c2[0]*a) / 2.0)),

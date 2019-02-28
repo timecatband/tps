@@ -1,5 +1,6 @@
 from partybar import PartyBar
 from time import sleep
+import copy
 
 def DmxSent(status):
     return
@@ -12,6 +13,20 @@ def DmxSent(status):
 class Command():
     def doubletime(self):
         self.switchAfter = self.switchAfter / 2.0
+
+class DimCommand(Command):
+    def __init__(self, scene, after, target, duration):
+        self.scene2 = PartyBar.clone(scene)
+
+def makeDimCommand(c, after, target, duration):
+    c2 = copy.deepcopy(c)
+    c2.dim(target)
+    return FadeCommand(c, c2, after, duration)
+
+def makeReverseDimCommand(c, after, target, duration):
+    c2 = copy.deepcopy(c)
+    c2.dim(target)
+    return FadeCommand(c2, c, after, duration)
 
 
 class SceneCommand(Command):
@@ -41,7 +56,6 @@ class FadeCommand(Command):
     src = self.scene1
     if src == None:
         src = PartyBar(lastState)
-        print("Using src: " + str(src))
 
     fps = 120
     frames = 0.0

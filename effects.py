@@ -31,10 +31,10 @@ def fourstepmover(duration, color, background = BLACK):
 
     sceneDur = duration / 4.0
     
-    c.add(FadeCommand(None, p1, 0, sceneDur/4))
-    c.add(FadeCommand(p1, p2, sceneDur, sceneDur/4))
-    c.add(FadeCommand(p2, p3, sceneDur, sceneDur/4))
-    c.add(FadeCommand(p3, p4, sceneDur, sceneDur/4))
+    c.add(FadeCommand(None, p1, 0, sceneDur/2))
+    c.add(FadeCommand(p1, p2, sceneDur, sceneDur/2))
+    c.add(FadeCommand(p2, p3, sceneDur, sceneDur/2))
+    c.add(FadeCommand(p3, p4, sceneDur, sceneDur/2))
     c.add(SleepCommand(sceneDur))
     return c
     

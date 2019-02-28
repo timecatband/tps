@@ -24,6 +24,11 @@ def buildChorus():
     white.set(YELLOW, WHITE, WHITE, YELLOW)
     fill = cstrobe(PURPLE, white)
     chorus = Chase()
+
+    blue = PartyBar()
+    blue.set(BLUE, WHITE, WHITE, BLUE)
+    blue2 = PartyBar()
+    blue2.set(BLUE, CYAN, CYAN, BLUE)
     
     cyan = PartyBar()
     cyan.set(CYAN, WHITE, WHITE, CYAN)
@@ -32,9 +37,9 @@ def buildChorus():
     black.all(BLACK)
 
     for i in range(32): #32
-        chorus.add(FadeCommand(white, black, 0, .2))
-        chorus.add(FadeCommand(cyan, black, 1, .6))
-        chorus.add(FadeCommand(cyan, black, 1, .6))
+        chorus.add(makeDimCommand(white, 0, 0.5, .8))
+        chorus.add(makeDimCommand(blue, 1, 0.3, .8))
+        chorus.add(makeDimCommand(blue2, 1, 0.3, .8))
         chorus.add(SleepCommand(1))
     print("Running chorus")
 
@@ -46,14 +51,14 @@ def buildChorus():
     orange.all(ORANGE)
 
 
-    chorus.add(SceneCommand(red, 0))
-    chorus.add(SceneCommand(purple, 6))
-    chorus.add(SceneCommand(orange, 3))
+    chorus.add(makeDimCommand(red, 0, 0.5, 3))
+    chorus.add(makeReverseDimCommand(purple, 6, 0.2, 2))
+    chorus.add(makeReverseDimCommand(orange, 3, 0.2, 2))
     chorus.add(SleepCommand(3))
-    chorus.add(SceneCommand(red, 0))
-    chorus.add(SceneCommand(purple, 6))
-    chorus.add(SceneCommand(orange, 3))
-    chorus.add(SleepCommand(3))
+    chorus.add(makeDimCommand(red, 0, 0.5, 3))
+    chorus.add(makeReverseDimCommand(purple, 6, 0.2, 2))
+    chorus.add(makeReverseDimCommand(orange, 3, 0.2, 2))
+x    chorus.add(SleepCommand(3))
 
     # "Theres...a sound around"
     chorus.add(SceneCommand(white, 0))

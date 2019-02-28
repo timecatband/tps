@@ -4,7 +4,7 @@ def count_and_run(l, scene):
     i = 0
     bpmSample = [0, 0, 0, 0]
     while i < 4:
-        raw_input()
+        raw_input(">>")
         bpmSample[i] = time()
         i = i+1
     average = 0
@@ -24,7 +24,7 @@ def run(l, handler):
         exec "from effects import *"
         exec "from colors import *"
         exec "from partybar import PartyBar"
-        r = raw_input()
+        r = raw_input(">>")
         if len(r) > 0:
 #            try:
 #            exec r
