@@ -1,5 +1,6 @@
 import array
 from math import floor
+from colors import *
 
 class PartyBar():
   def clone(other):
@@ -65,3 +66,14 @@ class PartyBar():
     for i in range(3,15):
       dest.data[i] = int(floor((p2.data[i]-p1.data[i])*a+p1.data[i]))
     return dest
+
+PartyBar.RED = PartyBar().all(RED)
+PartyBar.GREEN = PartyBar().all(GREEN)
+PartyBar.BLUE = PartyBar().all(BLUE)
+PartyBar.PURPLE = PartyBar().all(PURPLE)
+PartyBar.BLACK = PartyBar().all(BLACK)
+PartyBar.WHITE = PartyBar().all(WHITE)
+PartyBar.CYAN = PartyBar().all(CYAN)
+PartyBar.YELLOW = PartyBar().all(YELLOW)
+PartyBar.ORANGE = PartyBar().all(ORANGE)
+
