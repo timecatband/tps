@@ -91,8 +91,8 @@ def strobe(scene, beatdivision, duration):
     scenes = 0
     while scenes < numScenes:
         print("Adding commands" + str(scenes))
-        c.add(SceneCommand(scene, 0))
-        c.add(SceneCommand(off, beatdivision))
+        c.add(SceneCommand(off, 0))
+        c.add(SceneCommand(scene, beatdivision))
         c.add(SleepCommand(beatdivision))
         scenes = scenes+ 1
 
