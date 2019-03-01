@@ -9,6 +9,7 @@ WHITE = (255, 255, 255)
 CYAN = (0, 255, 255)
 YELLOW = (255, 255, 0)
 ORANGE = (255, 100, 0)
+PINK = (133, 26, 30)
 
 def dim(c, a):
   return (int(floor(c[0]*a)), int(floor(c[1]*a)), int(floor(c[2]*a)))
