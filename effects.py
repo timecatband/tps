@@ -4,6 +4,15 @@ from commands import *
 from colors import *
 import copy
 
+def lf(c1, c2):
+    p1 = PartyBar().all(c1)
+    p2 = PartyBar().all(c2)
+    c = Chase()
+    c.add(FadeCommand(p1, p2, 15, 15.8))
+    c.add(FadeCommand(p2, p1, 16, 15.8))
+    c.loop = True
+    return c
+
 def fourstepmover(duration, color, background = BLACK, fadeDivisor=2.0):
     c = Chase()
     p0 = PartyBar()

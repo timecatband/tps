@@ -26,7 +26,7 @@ def buildVerse():
     c.loop = True
     return c
 
-def buildChorus():
+def buildChorus(second):
     white = PartyBar()
     white.set(YELLOW, WHITE, WHITE, YELLOW)
     fill = cstrobe(PURPLE, white)
@@ -43,7 +43,12 @@ def buildChorus():
     black = PartyBar()
     black.all(BLACK)
 
-    for i in range(32): #32
+    if second == True:
+        numWaltz = 16
+    else:
+        numWaltz = 32
+
+    for i in range(numWaltz): #32
         chorus.add(makeDimCommand(white, 0, 0.5, .8))
         chorus.add(makeDimCommand(blue, 1, 0.3, .8))
         chorus.add(makeDimCommand(blue2, 1, 0.3, .8))
@@ -89,7 +94,7 @@ def buildChorus():
 
 def run(l):
     v = buildVerse()
-    (fill, chorus) = buildChorus()
+    (fill, chorus) = buildChorus(False)
 
     l.run(v)
     count_and_run(l, fill)
@@ -99,6 +104,9 @@ def run(l):
 
     v.bpm = l.bpm / 2.0
     l.run(v)
+    (fill, chorus) = buildChorus(True)
+    chorus.bpm = l.bpm * 2
+
     count_and_run(l, fill)
     l.run(chorus)
 

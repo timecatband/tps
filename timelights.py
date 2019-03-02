@@ -75,6 +75,12 @@ class LightDrummer():
 
   def run(self, command):
     self.lastQueue.put(command)
+  
+  def runCommand(self, command):
+    self.lastQueue.put(Chase().add(command))
+
+  def runScene(self, scene):
+    self.runCommand(SceneCommand(scene, 0))
 
   def changeBpm(self, newBpm):
     self.bpm = newBpm
