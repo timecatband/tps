@@ -89,7 +89,7 @@ class LightDrummer():
   # The main executor thread
   def lightDrum(self, client, queue):
     chase = None
-    lastState = PartyBar().data
+    lastState = PartyBar().all(WHITE).data
 
     while True:
       if chase != None and chase.loop == True:

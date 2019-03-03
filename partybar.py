@@ -18,6 +18,13 @@ class PartyBar():
       else:
           for i in data:
               self.data.append(i)
+  def strobe(self, value):
+    
+    value = int(floor(value))
+    if value < 127:
+      value = 2 * value
+    
+    self.data[2] = int(floor(value))
   def dim(self, amount):
     self.data[1] = int(floor(255*amount))
     return self

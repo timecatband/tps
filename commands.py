@@ -57,7 +57,7 @@ class FadeCommand(Command):
     if src == None:
         src = PartyBar(lastState)
 
-    fps = 120
+    fps = 30
     frames = 0.0
     fade_duration = 60.0/bpm * self.duration
     numFrames = fade_duration*fps

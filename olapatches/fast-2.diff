@@ -1,0 +1,11 @@
+--- a/plugins/ftdidmx/FtdiDmxPlugin.h	2019-03-02 23:42:04.000000000 -0800
++++ b/plugins/ftdidmx/FtdiDmxPlugin.h	2019-03-02 23:41:52.000000000 -0800
+@@ -63,7 +63,7 @@
+   bool StopHook();
+   bool SetDefaultPreferences();
+ 
+-  static const uint8_t DEFAULT_FREQUENCY = 30;
++  static const uint8_t DEFAULT_FREQUENCY = 120;
+ 
+   static const char K_FREQUENCY[];
+   static const char PLUGIN_NAME[];
