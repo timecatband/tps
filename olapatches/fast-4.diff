@@ -1,0 +1,13 @@
+diff --git a/FtdiWidget.cpp.orig b/FtdiWidget.cpp
+index 384ed20..becb4d2 100644
+--- a/plugins/ftdidmx/FtdiWidget.cpp
++++ b/plugins/ftdidmx/FtdiWidget.cpp
+@@ -350,6 +350,6 @@ bool FtdiInterface::SetBreak(bool on) {
+
+ bool FtdiInterface::Write(const ola::DmxBuffer& data) {
+   unsigned char buffer[DMX_UNIVERSE_SIZE + 1];
+-  unsigned int length = DMX_UNIVERSE_SIZE;
++  unsigned int length = DMX_UNIVERSE_SIZE/4;
+   buffer[0] = DMX512_START_CODE;
+
+   data.Get(buffer + 1, &length);

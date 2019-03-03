@@ -1,13 +1,20 @@
-diff --git a/FtdiWidget.cpp.orig b/FtdiWidget.cpp
-index 384ed20..becb4d2 100644
---- a/plugins/ftdidmx/FtdiWidget.cpp
-+++ b/plugins/ftdidmx/FtdiWidget.cpp
-@@ -350,7 +350,7 @@ bool FtdiInterface::SetBreak(bool on) {
+--- a/plugins/ftdidmx/FtdiDmxThread.cpp	2019-03-03 11:12:28.000000000 -0800
++++ b/plugins/ftdidmx/FtdiDmxThread.cpp	2019-03-03 11:12:50.000000000 -0800
+@@ -111,7 +111,7 @@
+     }
  
- bool FtdiInterface::Write(const ola::DmxBuffer& data) {
-   unsigned char buffer[DMX_UNIVERSE_SIZE + 1];
--  unsigned int length = DMX_UNIVERSE_SIZE;
-+  unsigned int length = DMX_UNIVERSE_SIZE/8;
-   buffer[0] = DMX512_START_CODE;
+     if (m_granularity == GOOD) {
+-      usleep(DMX_BREAK);
++      usleep(DMX_BREAK*4);
+     }
  
-   data.Get(buffer + 1, &length);
+     if (!m_interface->SetBreak(false)) {
+@@ -119,7 +119,7 @@
+     }
+ 
+     if (m_granularity == GOOD) {
+-      usleep(DMX_MAB);
++      usleep(DMX_MAB*2);
+     }
+ 
+     if (!m_interface->Write(buffer)) {
