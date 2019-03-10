@@ -4,8 +4,10 @@ from chase import *
 from commands import *
 from effects import *
 from random import random
+from raw_shell import RawShell
 import shell
 import colors
+import sys
 
 ROYALRED = (RED, WHITE, YELLOW, PURPLE)
 LUXURY = (YELLOW, RED, PURPLE, WHITE)
@@ -107,67 +109,72 @@ def randomColor():
 def randomColorScheme():
     return (randomColor(), randomColor(), randomColor(), randomColor())
 
-def jam(l, colorScheme):
-    jam.colorScheme = colorScheme
-    l.run(ambience1(jam.colorScheme[0], jam.colorScheme[1]))
-
-    jam.lastInput = "1"
-
-    def handle_input(input):
+class JamShell(RawShell):
+    def __init__(self, l, colorScheme):
+        self.l = l
+        self.colorScheme = colorScheme
+        self.lastInput = "1"
+    def handler(self, input):
         if input == "1":
-            l.runImmediately(ambience1(jam.colorScheme[0], jam.colorScheme[1]))
+            self.l.runImmediately(ambience1(self.colorScheme[0], self.colorScheme[1]))
+            return True
         if input == "2":
-            l.runImmediately(secondAmbience(jam.colorScheme[0], jam.colorScheme[2]))
+            self.l.runImmediately(secondAmbience(self.colorScheme[0], self.colorScheme[2]))
+            return True
         if input == "3":
-            l.runImmediately(indefstrobe(l.bpm, jam.colorScheme[3]))
-            raw_input()
-            l.runImmediately(ambience1(jam.colorScheme[0], jam.colorScheme[1]))
+            self.l.runImmediately(indefstrobe(self.l.bpm, self.colorScheme[3]))
+            sys.stdin.read(1)
+            self.l.runImmediately(ambience1(self.colorScheme[0], self.colorScheme[1]))
+            return True
         if input == "4":
-            m = fourstepmover(4, jam.colorScheme[0], jam.colorScheme[1])
+            m = fourstepmover(4, self.colorScheme[0], self.colorScheme[1])
             m.loop = True
-            l.runImmediately(m)
+            self.l.runImmediately(m)
+            return True
         if input == "5":
-            m = fourstepmover(2, jam.colorScheme[0], jam.colorScheme[1])
+            m = fourstepmover(2, self.colorScheme[0], self.colorScheme[1])
             m.loop = True
-            l.runImmediately(m)
+            self.l.runImmediately(m)
+            return True
         if input == "6":
-            m = fourstepmover(1, jam.colorScheme[0], jam.colorScheme[1])
+            m = fourstepmover(1, self.colorScheme[0], self.colorScheme[1])
             m.loop = True
-            l.runImmediately(m)
+            self.l.runImmediately(m)
+            return True
         if input == "7":
-            l.runImmediately(rapidAmbience(jam.colorScheme[0], jam.colorScheme[2]))
+            self.l.runImmediately(rapidAmbience(self.colorScheme[0], self.colorScheme[2]))
+            return True
         if input == "8":
-            jam.colorScheme = chalkify(jam.colorScheme)
-            handle_input(jam.lastInput)
-            input = jam.lastInput
+            self.colorScheme = chalkify(self.colorScheme)
+            self.handler(self.lastInput)
+            input = self.lastInput
+            return True
         if input == "9":
-            jam.colorScheme = dechalkify(jam.colorScheme)
-            handle_input(jam.lastInput)
-            input = jam.lastInput
-        if input[0] == "c":
-            input = input.lstrip("c")
-            if input == "r":
-                jam.colorScheme = randomColorScheme()
-            else:
-                jam.colorScheme = globals()[input]
-            handle_input(jam.lastInput)
-            input = jam.lastInput
+            self.colorScheme = dechalkify(self.colorScheme)
+            self.handler(self.lastInput)
+            input = self.lastInput
+            return True
         if input[0] == "-":
-            l.bpm = l.bpm/2.0
-            handle_input(jam.lastInput)
-            input = jam.lastInput
+            self.l.bpm = self.l.bpm/2.0
+            self.handler(self.lastInput)
+            input = self.lastInput
+            return True
         if input[0] == "=":
-            l.bpm = l.bpm*2.0
-            handle_input(jam.lastInput)
-            input = jam.lastInput
-        jam.lastInput = input
+            self.l.bpm = self.l.bpm*2.0
+            self.handler(self.lastInput)
+            input = self.lastInput
+            return True
+        return False
+        self.lastInput = input
 
+def jam(l, colorScheme):
+    j = JamShell(l, colorScheme)
+    l.run(ambience1(colorScheme[0], colorScheme[1]))
 
-    shell.run(l, handle_input)
-    print("After run shell")
+    j.run()
 
 def run(l):
-    colorScheme = SATANSFINGERS
+    colorScheme = ROYALRED
     jam(l, colorScheme)
     
 
